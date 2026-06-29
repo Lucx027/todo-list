@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Todo List 学习项目</title>
+    <style>
+        /* 简单的样式，让界面好看一点 */
+        body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 0 20px; }
+        h2 { text-align: center; color: #333; }
+        
+        /* 输入区域布局 */
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .input-group input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        .input-group button { padding: 10px 20px; font-size: 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .input-group button:hover { background: #45a049; }
+
+        /* 列表样式 */
+        ul { list-style: none; padding: 0; }
+        li { background: #f9f9f9; padding: 12px; margin-bottom: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
+        
+        /* 任务文本区域 */
+        .task-text { flex: 1; cursor: pointer; }
+        /* 删除按钮样式 */
+        .delete-btn { background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .completed .task-text {
+            text-decoration: line-through; /* 添加删除线 */
+            color: #888; /* 文字变灰 */
+        }
+        /* 筛选按钮组样式 */
+        .filter-group { display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; }
+        .filter-btn { padding: 6px 15px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 4px; font-size: 14px; }
+        .filter-btn.active { background: #4CAF50; color: white; border-color: #4CAF50; }
+    </style>
+</head>
+<body>
+
+    <h2>📝 我的待办事项</h2>
+    
+    <!-- 1. 输入区域 -->
+    <div class="input-group">
+        <input type="text" id="taskInput" placeholder="输入新任务，按回车或点击添加...">
+        <button id="addBtn">添加</button>
+    </div>
+
+    <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="active">未完成</button>
+        <button class="filter-btn" data-filter="completed">已完成</button>
+    </div>
+
+    <!-- 2. 任务列表容器 -->
+    <ul id="taskList"></ul>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
