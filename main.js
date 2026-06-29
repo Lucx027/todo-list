@@ -1,11 +1,13 @@
 
-import { renderTasks, addTask, deleteTask, toggleTask, setFilter } from './taskManager.js';
+import { tasks, renderTasks, addTask, deleteTask, toggleTask, setFilter } from './taskManager.js';
 
 // 1. 获取页面元素
 const taskInput = document.querySelector('#taskInput');
 const addBtn = document.querySelector('#addBtn');
 const taskList = document.querySelector('#taskList');
 const filterGroup = document.querySelector('.filter-group');
+
+
 
 // 2. 绑定添加事件
 addBtn.addEventListener('click', () => addTask(taskInput));
@@ -38,3 +40,25 @@ filterGroup.addEventListener('click', (e) => {
 
 // 5. 页面初始化渲染
 renderTasks();
+
+Sortable.create(taskList, {
+    handle: '.drag-handle',   // 只有点击这个元素才能触发拖拽
+    animation: 150,           // 拖拽时的动画时长（毫秒）
+    ghostClass: 'ghost-item', // 拖拽时占位元素的 CSS 类名
+    
+    // 拖拽结束时的回调函数
+    onEnd: function(evt) {
+        // evt.oldIndex: 拖拽前的位置
+        // evt.newIndex: 拖拽后的位置
+        
+        // 1. 从原位置取出被拖拽的任务
+        const movedTask = tasks.splice(evt.oldIndex, 1)[0];
+        // 2. 将其插入到新位置
+        tasks.splice(evt.newIndex, 0, movedTask);
+        
+        // 3. 将更新后的顺序保存到 localStorage
+        localStorage.setItem('myTasks', JSON.stringify(tasks));
+        
+        console.log(`任务从位置 ${evt.oldIndex} 移动到了 ${evt.newIndex}`);
+    }
+});

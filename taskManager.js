@@ -1,11 +1,9 @@
 // taskManager.js
 
 // 1. 状态管理：数据与当前筛选条件
-let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
+export let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 let currentFilter = 'all'; // 默认显示全部
-
 const taskList = document.querySelector('#taskList');
-
 // 2. 核心渲染函数（加入了筛选逻辑）
 export function renderTasks() {
     taskList.innerHTML = ''; 
@@ -23,6 +21,10 @@ export function renderTasks() {
         const li = document.createElement('li');
         if (task.completed) li.classList.add('completed');
 
+        const dragHandle = document.createElement('span');
+        dragHandle.className = 'drag-handle';
+        dragHandle.innerText = '☰'; // 使用一个汉堡菜单图标作为拖拽把手
+
         const span = document.createElement('span');
         span.className = 'task-text';
         span.innerText = task.text;
@@ -31,7 +33,7 @@ export function renderTasks() {
         dltBtn.className = 'delete-btn';
         dltBtn.innerText = '删除';
 
-        li.append(span, dltBtn);
+        li.append(dragHandle, span, dltBtn);
         taskList.appendChild(li);
     });
 }

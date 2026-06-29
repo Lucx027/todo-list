@@ -31,7 +31,24 @@
         .filter-group { display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; }
         .filter-btn { padding: 6px 15px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 4px; font-size: 14px; }
         .filter-btn.active { background: #4CAF50; color: white; border-color: #4CAF50; }
+        /* 拖拽手柄样式 */
+        .drag-handle {
+            cursor: grab; /* 鼠标悬浮时变成抓取图标 */
+            margin-right: 10px;
+            color: #888;
+            user-select: none; /* 防止拖拽时选中文字 */
+        }
+        .drag-handle:active {
+            cursor: grabbing; /* 按下时变成抓取中图标 */
+        }
+
+        /* SortableJS 拖拽时的占位符（幽灵元素）样式 */
+        .ghost-item {
+            opacity: 0.5;
+            background-color: #e0e0e0;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
 <body>
 
